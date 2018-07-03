@@ -34,12 +34,11 @@ class MasterServer(object):
         datas = []
         for log in self.client.logs().split('\n'):
             if len(log) > 0 and ' '.join(log.split()[3:]) not in datas and log.split()[0][0] in levels:
-                data = log.split()[0][0] + ' : ' + ' '.join(log.split()[3:])
+                data = log.split()[0] + ' : ' + ' '.join(log.split()[3:])
                 datas.append(data)
         return datas
 
     def show_count_logs(self):
-        levels = self.logs_levels()
         dates = self.get_container_dates()
         datas = self.get_container_logs_data()
         name = self.get_container_name()
@@ -49,7 +48,7 @@ class MasterServer(object):
         for date in dates:
             print mess.yellow("# %s" % date)
             for log in set(datas):
-                if len(log) > 0:
+                if len(log) > 0 and date in log:
                     print mess.normal("%s : %s" % (datas.count(log), log))
 
         print mess.red("=========================================\n\n")
