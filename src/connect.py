@@ -17,7 +17,7 @@ class RemoteOper(object):
         self.logfile = logfile
 
 
-    def Command(self, command):
+    def command(self, command):
         paramiko.util.log_to_file(self.logfile)
         conn = paramiko.SSHClient()
         conn.set_missing_host_key_policy(paramiko.AutoAddPolicy())

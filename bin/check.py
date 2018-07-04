@@ -15,8 +15,13 @@ def master():
     m = CommonHanld(config.MASTER_HOSTS, config.LOGS_LEVEL)
     m.master_handle()
 
+def nodes():
+    n = CommonHanld(config.NODE_HOSTS, config.PORT, config.USER, config.PASSWD,
+                    config.LOG_FILE, config.LOGS_LEVEL)
+    n.nodes_handle(config.SERVER, config.LOG_NAME)
 
-master()
+
+nodes()
 
 
 

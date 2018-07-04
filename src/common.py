@@ -9,6 +9,7 @@ import docker
 
 from master import MasterServer
 from color import ShowOutPut
+from nodes import NodesServer
 
 # class Containers(object):
 #
@@ -21,8 +22,12 @@ from color import ShowOutPut
 
 class CommonHanld(object):
 
-    def __init__(self, hosts, loglevels):
+    def __init__(self, hosts, port, user, passwd, logfile, loglevels):
         self.hosts = hosts
+        self.port = port
+        self.user = user
+        self.passwd = passwd
+        self.logfile = logfile
         self.loglevels = loglevels
         self.client = docker.from_env(version='1.24')
 
@@ -37,4 +42,15 @@ class CommonHanld(object):
             for container in containers:
                 master = MasterServer(host, self.loglevels, container)
                 master.show_count_logs()
+
+    def nodes_handle(self, server, logname):
+        mess = ShowOutPut()
+        print mess.blue("###################### Check k8s-nodes Container logs ###########################")
+        for host in self.hosts:
+            node = NodesServer(host, self.port, self.user, self.passwd, self.logfile, self.loglevels)
+            node.get_log_file(server, logname)
+
+
+
+
 
