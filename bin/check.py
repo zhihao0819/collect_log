@@ -18,7 +18,7 @@ def master():
 def nodes():
     n = CommonHanld(config.NODE_HOSTS, config.PORT, config.USER, config.PASSWD,
                     config.LOG_FILE, config.LOGS_LEVEL)
-    n.nodes_handle(config.SERVER, config.LOG_NAME)
+    n.nodes_handle(config.SERVER)
 
 
 nodes()
